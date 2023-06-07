@@ -22,41 +22,45 @@ export const addProduct = async (req, res) => {
 
 
 export const getAllProducts = async (req, res) => {
-    try{
+    try {
         const response = await Products.find({}).exec()
-        if(response){
+        if (response) {
             return res.send(response);
-        }else{
+        } else {
             return res.send("Products not found!")
         }
 
-    }catch(error){
+    } catch (error) {
         return res.send(error);
     }
 }
 export const getProducts = async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 5 } = req.query;
-  
+
     try {
-      // execute query with page and limit values
-      const products = await Products.find()
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .exec();
-  
-      // get total documents in the Posts collection 
-      const count = await Products.count();
-  
-      // return response with posts, total pages, and current page
-      res.json({
-        products,
-        totalPages: Math.ceil(count / limit),
-        currentPage: page
-      });
+        // execute query with page and limit values
+        const products = await Products.find()
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+
+        // get total documents in the Posts collection 
+        const count = await Products.count();
+
+        // return response with posts, total pages, and current page
+        res.json({
+            products,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        });
+
+
+
+
     } catch (err) {
-      console.error(err.message);
+        console.error(err.message);
     }
-  }
+}
 
 
