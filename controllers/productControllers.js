@@ -45,10 +45,10 @@ export const getProducts = async (req, res) => {
             .skip((page - 1) * limit)
             .exec();
 
-        // get total documents in the Posts collection 
+        // get total documents in the Products collection 
         const count = await Products.count();
 
-        // return response with posts, total pages, and current page
+        // return response with products, total pages, and current page
         res.json({
             products,
             totalPages: Math.ceil(count / limit),
