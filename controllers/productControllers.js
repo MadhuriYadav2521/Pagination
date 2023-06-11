@@ -123,7 +123,7 @@ export const getProducts = async (req, res) => {
             return res.send("No more products here!")
         }
 
-
+        console.log(product);
 
     } catch (err) {
         console.error(err.message);
