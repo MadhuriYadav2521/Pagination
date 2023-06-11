@@ -3,37 +3,16 @@ import encrypt from 'encryptjs';
 
 export const register = async (req, res) => {
     try {
-        //     const { name, email, password, pin } = req.body;
-        //     if (!name) return res.send("Name is required!");
-        //     if (!email) return res.send("email is requierd!");
-        //     if (!password) return res.send("password is requierd!");
-        //     if (!pin) return res.send("pin is requierd!");
-        //     var secretkey = 'ios';
-        //     var plainPin = pin;
-        //     var plaintext = password;
-        //     var cipherText = encrypt.encrypt(plaintext, secretkey, 256);
-        //     var cipherPin = encrypt.encrypt(plainPin, secretkey, 256);
-        //     const user = new Users({ name, email, password: cipherText, pin: cipherPin })
-
-        //     console.log(user, "users here");
-        //     await user.save();
-        //     return res.send("Registration successful.");
-        // } catch (error) {
-        //     console.log(error)
-        // }
         const { name, email, password, pin } = req.body;
-        if (!name) return res.send("Name is required!");
-        if (!email) return res.send("email is requierd!");
-        if (!password) return res.send("password is requierd!");
-        if (!pin) return res.send("pin is requierd!");
-        if (password.length <= 8) {
-            return res.send("User Password length is less than 8 !")
-        }
-        const response = await Users.find({ email: email }).exec();
-        // console.log(response,"response")
-        if (response.length) {
-            return res.send("Email is already Taken or You are already resgistered!!");
-        }
+        
+        // if (password.length <= 8) {
+        //     return res.send("User Password length is less than 8 !")
+        // }
+        // const response = await Users.find({ email: email }).exec();
+        // // console.log(response,"response")
+        // if (response.length) {
+        //     return res.send("Email is already Taken or You are already resgistered!!");
+        // }
         var secretkey = 'ios';
         var plainPin = pin;
         var plaintext = password;
@@ -53,8 +32,8 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email) return res.send("User Email is required");
-        if (!password) return res.send("User Password is required");
+        // if (!email) return res.send("User Email is required");
+        // if (!password) return res.send("User Password is required");
         const response = await Users.find({ email }).exec();
         var secretkey = 'ios';
         var decipher = encrypt.decrypt(response[0].password, secretkey, 256);
